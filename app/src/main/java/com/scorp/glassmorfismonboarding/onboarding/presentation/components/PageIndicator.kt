@@ -1,5 +1,6 @@
 package com.scorp.glassmorfismonboarding.onboarding.presentation.components
 
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -15,6 +16,7 @@ import androidx.compose.ui.modifier.modifierLocalMapOf
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.scorp.glassmorfismonboarding.onboarding.domain.model.pages
 import com.scorp.glassmorfismonboarding.ui.theme.AppTheme
 
 @Composable
@@ -24,6 +26,7 @@ fun PageIndicator(
     selectedPage: Int,
     indicatorSize: Dp = 10.dp
 ) {
+
     Row(
         modifier = modifier,
         horizontalArrangement = Arrangement.spacedBy(10.dp)

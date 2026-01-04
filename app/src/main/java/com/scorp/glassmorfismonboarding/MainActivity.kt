@@ -4,7 +4,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import com.scorp.glassmorfismonboarding.onboarding.presentation.OnBoardingScreen
 import com.scorp.glassmorfismonboarding.onboarding.presentation.components.BlurBackground
+import com.scorp.glassmorfismonboarding.onboarding.presentation.components.OnBoardingCard
 import com.scorp.glassmorfismonboarding.ui.theme.AppTheme
 
 class MainActivity : ComponentActivity() {
@@ -13,7 +15,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             AppTheme {
-                BlurBackground()
+                OnBoardingScreen()
             }
         }
     }
