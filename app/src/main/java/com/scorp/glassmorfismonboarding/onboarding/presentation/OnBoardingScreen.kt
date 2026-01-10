@@ -1,6 +1,8 @@
 package com.scorp.glassmorfismonboarding.onboarding.presentation
 
+import android.annotation.SuppressLint
 import android.app.Activity
+import androidx.activity.compose.LocalActivity
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -50,7 +52,7 @@ import com.scorp.glassmorfismonboarding.ui.theme.AppTheme
 
 @Composable
 fun OnBoardingScreen(modifier: Modifier = Modifier, viewModel: OnboardingViewModel) {
-    val activity = LocalContext.current as? Activity
+    val activity = LocalActivity.current
     var currentPage by remember { mutableIntStateOf(0) }
     Box {
         BlurBackground()
@@ -111,9 +113,9 @@ fun OnBoardingScreen(modifier: Modifier = Modifier, viewModel: OnboardingViewMod
                 transitionSpec = {
                     (fadeIn() + scaleIn()).togetherWith(fadeOut() + scaleOut())
                 }
-            ) {
+            ) {page->
                 Image(
-                    painterResource(pages[currentPage].image),
+                    painterResource(pages[page].image),
                     contentDescription = null,
                     contentScale = ContentScale.Fit,
                     modifier = Modifier
@@ -128,7 +130,7 @@ fun OnBoardingScreen(modifier: Modifier = Modifier, viewModel: OnboardingViewMod
                 buttonActions = ButtonActions(
                     next = { currentPage += 1 },
                     skip = if (currentPage == 2) null else ({
-                        // todo: Skip
+                        viewModel.saveAppEntry()
                     }),
                     getStarted = if (currentPage == 2) ({
                         viewModel.saveAppEntry()

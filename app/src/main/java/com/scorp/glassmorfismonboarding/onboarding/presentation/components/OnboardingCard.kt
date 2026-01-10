@@ -37,108 +37,108 @@ import com.scorp.glassmorfismonboarding.onboarding.domain.model.pages
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun OnBoardingCard(
-    page: Page,
-    buttonActions: ButtonActions,
-    modifier: Modifier = Modifier
+   page: Page,
+   buttonActions: ButtonActions,
+   modifier: Modifier = Modifier
 ) {
 
-    val textTransitionSpecRight = (scaleIn() + fadeIn()).togetherWith(scaleOut() + fadeOut())
+   val textTransitionSpecRight = (scaleIn() + fadeIn()).togetherWith(scaleOut() + fadeOut())
 
-    Column(
-        modifier = modifier
-            .clip(shape = RoundedCornerShape(10))
-            .border(
-                width = 1.dp,
-                color = Color.White.copy(alpha = 0.4f),
-                shape = RoundedCornerShape(10)
+   Column(
+      modifier = modifier
+         .clip(shape = RoundedCornerShape(10))
+         .border(
+            width = 1.dp,
+            color = Color.White.copy(alpha = 0.4f),
+            shape = RoundedCornerShape(10)
+         )
+         .background(
+            brush = Brush.verticalGradient(
+               colors = listOf(
+                  Color.White.copy(alpha = 0.4f),
+                  Color.White.copy(alpha = 0.1f)
+               )
             )
-            .background(
-                brush = Brush.verticalGradient(
-                    colors = listOf(
-                        Color.White.copy(alpha = 0.4f),
-                        Color.White.copy(alpha = 0.1f)
-                    )
-                )
-            ),
-    ) {
-        Column(
+         ),
+   ) {
+      Column(
+         modifier = Modifier
+            .padding(25.dp)
+      ) {
+         AnimatedContent(page.title, transitionSpec = { textTransitionSpecRight }) {
+            Text(
+               text = it,
+               fontSize = 32.sp,
+               lineHeight = 40.sp,
+               letterSpacing = 1.sp,
+               fontWeight = FontWeight.SemiBold,
+               color = Color.White
+            )
+         }
+         Spacer(modifier = Modifier.height(10.dp))
+         AnimatedContent(page.description, transitionSpec = { textTransitionSpecRight }) {
+            Text(
+               text = it,
+               color = Color(0xFFa6a7c8),
+               lineHeight = 20.sp,
+               fontSize = 14.sp
+            )
+         }
+         buttonActions.skip?.let {
+            Row(
+               modifier = Modifier
+                  .fillMaxWidth()
+                  .padding(top = 20.dp),
+               horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+               TextButton(
+                  onClick = buttonActions.skip
+               ) {
+                  Text("Skip", color = Color(0xFFa8b3d2))
+               }
+               Button(
+                  shape = RoundedCornerShape(30),
+                  colors = ButtonDefaults.buttonColors(
+                     containerColor = Color(0xFFe6e7ef),
+                     contentColor = Color.Black
+                  ),
+                  onClick = buttonActions.next!!
+               ) {
+                  Text("Next")
+               }
+            }
+         }
+         buttonActions.getStarted?.let {
+            Button(
+               modifier = Modifier
+                  .fillMaxWidth()
+                  .padding(20.dp),
+               shape = RoundedCornerShape(30),
+               colors = ButtonDefaults.buttonColors(
+                  containerColor = Color(0xFFe6e7ef),
+                  contentColor = Color.Black
+               ),
+               onClick = buttonActions.getStarted
+            ) {
+               Text("Get Started")
+            }
+         }
+         Spacer(Modifier.height(10.dp))
+         PageIndicator(
+            pagesCount = 3,
+            selectedPage = pages.indexOf(page) + 1,
+            indicatorSize = 7.dp,
             modifier = Modifier
-                .padding(25.dp)
-        ) {
-            AnimatedContent(page.title, transitionSpec = { textTransitionSpecRight }) {
-                Text(
-                    text = page.title,
-                    fontSize = 32.sp,
-                    lineHeight = 40.sp,
-                    letterSpacing = 1.sp,
-                    fontWeight = FontWeight.SemiBold,
-                    color = Color.White
-                )
-            }
-            Spacer(modifier = Modifier.height(10.dp))
-            AnimatedContent(page.description, transitionSpec = { textTransitionSpecRight }) {
-                Text(
-                    text = page.description,
-                    color = Color(0xFFa6a7c8),
-                    lineHeight = 20.sp,
-                    fontSize = 14.sp
-                )
-            }
-            buttonActions.skip?.let {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 20.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    TextButton(
-                        onClick = buttonActions.skip
-                    ) {
-                        Text("Skip", color = Color(0xFFa8b3d2))
-                    }
-                    Button(
-                        shape = RoundedCornerShape(30),
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = Color(0xFFe6e7ef),
-                            contentColor = Color.Black
-                        ),
-                        onClick = buttonActions.next!!
-                    ) {
-                        Text("Next")
-                    }
-                }
-            }
-            buttonActions.getStarted?.let {
-                Button(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(20.dp),
-                    shape = RoundedCornerShape(30),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(0xFFe6e7ef),
-                        contentColor = Color.Black
-                    ),
-                    onClick = buttonActions.getStarted
-                ) {
-                    Text("Get Started")
-                }
-            }
-            Spacer(Modifier.height(10.dp))
-            PageIndicator(
-                pagesCount = 3,
-                selectedPage = pages.indexOf(page) + 1,
-                indicatorSize = 7.dp,
-                modifier = Modifier
-                    .align(Alignment.CenterHorizontally)
-                    .padding(bottom = 20.dp)
-            )
-        }
+               .align(Alignment.CenterHorizontally)
+               .padding(bottom = 20.dp)
+         )
+      }
 
-    }
+   }
 }
 
 data class ButtonActions(
-    val skip: (() -> Unit)? = null,
-    val next: (() -> Unit)? = null,
-    val getStarted: (() -> Unit)? = null
+   val skip: (() -> Unit)? = null,
+   val next: (() -> Unit)? = null,
+   val getStarted: (() -> Unit)? = null
 )

@@ -10,15 +10,16 @@ import javax.inject.Inject
 
 @HiltViewModel
 class OnboardingViewModel @Inject constructor(
-    private val saveAppEntryUseCase: SaveAppEntry
-): ViewModel() {
+    private val saveAppEntryUseCase: SaveAppEntry,
+) : ViewModel() {
 
-    fun saveAppEntry(){
+    fun saveAppEntry() {
         viewModelScope.launch {
             Log.d("TAG", "OnbViewmodel: save")
             saveAppEntryUseCase()
         }
     }
+
 
 
 }

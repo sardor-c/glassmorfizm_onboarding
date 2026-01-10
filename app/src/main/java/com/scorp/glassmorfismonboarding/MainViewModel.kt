@@ -27,7 +27,7 @@ class MainViewModel @Inject constructor(
             } else {
                 _startDestination.value = Route.OnBoarding.route
             }
-            delay(300)
+            //delay(100)
         }.launchIn(viewModelScope)
     }
 }

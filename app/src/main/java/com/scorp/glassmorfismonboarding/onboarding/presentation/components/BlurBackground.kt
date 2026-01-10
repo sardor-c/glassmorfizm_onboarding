@@ -36,23 +36,23 @@ fun BlurBackground(modifier: Modifier = Modifier) {
                 .fillMaxSize()
                 .background(Color.White.copy(alpha = 0.08f))
         )
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .blur(25.dp, 25.dp)
-                .graphicsLayer {
-                    rotationZ = -25f
-                    renderEffect = RenderEffect.createBlurEffect(40.dp.toPx(), 40.dp.toPx(), Shader.TileMode.CLAMP).asComposeRenderEffect()
-                }
-                .drawBehind {
-                    drawOval(
-                        size = Size(width = size.width, height = size.height/4),
-                        topLeft = Offset(-size.width/3, size.height/2.5f),
-                        color = Color(0xFFf1a6fa),
-                        style = Stroke(width = 80f),
-                    )
-                }
-        )
+//        Box(
+//            modifier = Modifier
+//                .fillMaxSize()
+//                .blur(25.dp, 25.dp)
+//                .graphicsLayer {
+//                    rotationZ = -25f
+//                    renderEffect = RenderEffect.createBlurEffect(40.dp.toPx(), 40.dp.toPx(), Shader.TileMode.CLAMP).asComposeRenderEffect()
+//                }
+//                .drawBehind {
+//                    drawOval(
+//                        size = Size(width = size.width, height = size.height/4),
+//                        topLeft = Offset(-size.width/3, size.height/2.5f),
+//                        color = Color(0xFFf1a6fa),
+//                        style = Stroke(width = 80f),
+//                    )
+//                }
+//        )
         Box(
             modifier = Modifier
                 .fillMaxSize()
