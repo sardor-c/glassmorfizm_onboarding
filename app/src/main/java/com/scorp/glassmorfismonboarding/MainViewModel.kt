@@ -15,19 +15,16 @@ import kotlinx.coroutines.flow.onEach
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val readAppEntry: ReadAppEntry
+   private val readAppEntry: ReadAppEntry
 ) : ViewModel() {
-    private val _startDestination = mutableStateOf(Route.OnBoarding.route)
-    val startDestination: State<String> = _startDestination
+   private val _startDestination = mutableStateOf<String?>(null)
+   val startDestination: State<String?> = _startDestination
 
-    init {
-        readAppEntry().onEach { entered ->
-            if (entered) {
-                _startDestination.value = Route.App.route
-            } else {
-                _startDestination.value = Route.OnBoarding.route
-            }
-            //delay(100)
-        }.launchIn(viewModelScope)
-    }
+   init {
+      readAppEntry().onEach { entered ->
+         _startDestination.value =
+            if (entered) Route.App.route
+            else Route.OnBoarding.route
+      }.launchIn(viewModelScope)
+   }
 }

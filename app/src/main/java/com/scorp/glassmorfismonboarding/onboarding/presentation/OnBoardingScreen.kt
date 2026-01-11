@@ -1,7 +1,5 @@
 package com.scorp.glassmorfismonboarding.onboarding.presentation
 
-import android.annotation.SuppressLint
-import android.app.Activity
 import androidx.activity.compose.LocalActivity
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.fadeIn
@@ -39,23 +37,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.scorp.glassmorfismonboarding.onboarding.domain.model.pages
 import com.scorp.glassmorfismonboarding.onboarding.presentation.components.BlurBackground
 import com.scorp.glassmorfismonboarding.onboarding.presentation.components.ButtonActions
 import com.scorp.glassmorfismonboarding.onboarding.presentation.components.OnBoardingCard
-import com.scorp.glassmorfismonboarding.ui.theme.AppTheme
 
 @Composable
 fun OnBoardingScreen(modifier: Modifier = Modifier, viewModel: OnboardingViewModel) {
     val activity = LocalActivity.current
     var currentPage by remember { mutableIntStateOf(0) }
     Box {
-        BlurBackground()
+        BlurBackground(state = currentPage+1)
         Column(
             modifier = modifier
                 .fillMaxSize()

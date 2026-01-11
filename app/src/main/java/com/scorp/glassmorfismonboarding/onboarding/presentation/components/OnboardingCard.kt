@@ -41,9 +41,7 @@ fun OnBoardingCard(
    buttonActions: ButtonActions,
    modifier: Modifier = Modifier
 ) {
-
    val textTransitionSpecRight = (scaleIn() + fadeIn()).togetherWith(scaleOut() + fadeOut())
-
    Column(
       modifier = modifier
          .clip(shape = RoundedCornerShape(10))

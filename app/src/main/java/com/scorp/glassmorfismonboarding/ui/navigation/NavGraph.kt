@@ -1,7 +1,9 @@
 package com.scorp.glassmorfismonboarding.ui.navigation
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -16,21 +18,30 @@ import com.scorp.glassmorfismonboarding.onboarding.presentation.OnboardingViewMo
 
 
 @Composable
-fun AppNavGraph(startDestination: String, modifier: Modifier = Modifier) {
-    NavHost(navController = rememberNavController(), startDestination = startDestination) {
-        composable(Route.OnBoarding.route) {
+fun AppNavGraph(startDestination: String?, modifier: Modifier = Modifier) {
+   if (startDestination == null) {
+      Box(modifier = Modifier
+         .fillMaxSize()
+         .background(MaterialTheme.colorScheme.background))
+   } else {
+      NavHost(
+         modifier = modifier,
+         navController = rememberNavController(),
+         startDestination = startDestination
+      ) {
+         composable(Route.OnBoarding.route) {
             val viewModel: OnboardingViewModel = hiltViewModel()
             OnBoardingScreen(viewModel = viewModel)
-        }
+         }
 
-        composable(Route.App.route) {
+         composable(Route.App.route) {
             Box(
-                modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
+               modifier = Modifier.fillMaxSize(),
+               contentAlignment = Alignment.Center
             ) {
-                Text("You're Welcome!")
+               Text("You're Welcome!")
             }
-        }
-    }
-
+         }
+      }
+   }
 }
